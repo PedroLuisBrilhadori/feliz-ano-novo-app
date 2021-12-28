@@ -1,7 +1,7 @@
-export interface Post {
-    title?: string;
+export interface PostModel {
+    title: string;
     message: string;
     hour: string;
-    author: string;
-    to: string;
+    author?: string;
+    to?: string;
 }
