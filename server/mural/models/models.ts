@@ -1,7 +1,7 @@
 export interface PostModel {
     title: string;
     message: string;
-    hour: string;
+    date: Date;
     author?: string;
     to?: string;
 }
