@@ -6,6 +6,6 @@ export function InitFirebase() {
 
     admin.initializeApp({
         credential: admin.credential.cert(adminConfig),
-        databaseURL: 'https://link-enc-default-rtdb.firebaseio.com',
+        databaseURL: 'https://feliz-2022-default-rtdb.firebaseio.com/',
     });
 }
