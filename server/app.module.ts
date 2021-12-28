@@ -4,8 +4,8 @@ import { AppService } from './app.service';
 import { MuralModule } from './mural/mural.module';
 
 @Module({
-  imports: [MuralModule],
-  controllers: [AppController],
-  providers: [AppService],
+    imports: [MuralModule],
+    controllers: [AppController],
+    providers: [AppService],
 })
 export class AppModule {}
