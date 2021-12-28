@@ -9,10 +9,12 @@ export class MuralController {
 
     @Post('create')
     createNewPost(@Req() req: Request) {
-        return this.convertToPostType(
+        let post = this.convertToPostType(
             req.query.title.toString(),
             req.query.message.toString(),
         );
+
+        return this.muralService.createPost(post);
     }
 
     private convertToPostType(
@@ -22,11 +24,12 @@ export class MuralController {
         to?: string,
     ): PostModel {
         return {
+            id: this.muralService.randomId(),
             title: title.length > 40 ? null : title,
             message: message.length > 300 ? null : message,
             date: new Date(),
             author: author ? author : 'Anônimo',
-            to: to ? to : undefined,
+            to: to ? to : null,
         };
     }
 }
