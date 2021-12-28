@@ -1,4 +1,4 @@
-import { Controller, Param, Post, Req } from '@nestjs/common';
+import { Controller, Get, Param, Post, Req } from '@nestjs/common';
 import { Request } from 'express';
 import { PostModel } from './models';
 import { MuralService } from './service';
@@ -31,5 +31,20 @@ export class MuralController {
             author: author ? author : 'Anônimo',
             to: to ? to : null,
         };
+    }
+
+    @Get('')
+    getAllPosts() {
+        return this.muralService.getAllPosts();
+    }
+
+    @Get('id/:id')
+    getPostWihtId(@Param('id') id) {
+        return this.muralService.getPostWithId(id);
+    }
+
+    @Get('title/:title')
+    getPostWithTitle(@Param('title') title) {
+        return this.muralService.getPostWithTitle(title);
     }
 }

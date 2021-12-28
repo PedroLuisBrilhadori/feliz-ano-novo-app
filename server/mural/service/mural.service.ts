@@ -40,4 +40,39 @@ export class MuralService implements OnModuleInit {
                 ];
         return link;
     }
+
+    getAllPosts(): PostModel {
+        let posts: PostModel;
+        this.ref.child('posts').on('value', (snap) => {
+            posts = snap.val();
+        });
+
+        return posts;
+    }
+
+    getPostWithId(id: string): PostModel {
+        let post: PostModel;
+        this.ref
+            .child('posts')
+            .orderByKey()
+            .equalTo(id)
+            .on('value', (snap) => {
+                post = snap.val();
+            });
+
+        return post;
+    }
+
+    getPostWithTitle(title: string): PostModel {
+        let post: PostModel;
+        this.ref
+            .child('posts')
+            .orderByChild('title')
+            .equalTo(title)
+            .on('value', (snap) => {
+                post = snap.val();
+            });
+
+        return post;
+    }
 }
