@@ -34,7 +34,6 @@ export class MuralController {
             id: this.muralService.randomId(),
             title: title.length > 40 ? null : title,
             message: message.length > 300 ? null : message,
-            date: new Date(),
             author: author ? author : 'Anônimo',
             to: to ? to : null,
         };
