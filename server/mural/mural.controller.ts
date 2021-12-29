@@ -1,22 +1,27 @@
-import { Controller, Get, Param, Post, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
+import { Request, Response } from 'express';
 import { PostModel } from './models';
 import { MuralService } from './service';
 
+const url = 'https://feliz-ano-novo-flax.vercel.app/create/';
 @Controller('mural')
 export class MuralController {
     constructor(private muralService: MuralService) {}
 
     @Post('create')
-    createNewPost(@Req() req: Request) {
+    createNewPost(@Req() req: Request, @Res() res: Response) {
         let post = this.convertToPostType(
-            req.query.title.toString(),
-            req.query.message.toString(),
-            req.query.author?.toString(),
-            req.query.to?.toString(),
+            req.body.title?.toString(),
+            req.body.message?.toString(),
+            req.body.author?.toString(),
+            req.body.to?.toString(),
         );
 
-        return this.muralService.createPost(post);
+        if (post.title && post.message) {
+            if (this.muralService.createPost(post))
+                res.status(301).redirect(url + '?create=true');
+            else res.status(301).redirect(url + '?create=false');
+        } else res.status(301).redirect(url + '?create=false');
     }
 
     private convertToPostType(
