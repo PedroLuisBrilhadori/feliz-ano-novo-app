@@ -12,6 +12,8 @@ export class MuralController {
         let post = this.convertToPostType(
             req.query.title.toString(),
             req.query.message.toString(),
+            req.query.author?.toString(),
+            req.query.to?.toString(),
         );
 
         return this.muralService.createPost(post);
