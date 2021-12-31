@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { PostModel } from './models';
 import { MuralService } from './service';
 
-const url = 'https://feliz-ano-novo-flax.vercel.app/create/';
+const url = 'https://mural.vercel.app/create/';
 @Controller('mural')
 export class MuralController {
     constructor(private muralService: MuralService) {}
