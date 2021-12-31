@@ -4,6 +4,7 @@ import * as admin from 'firebase-admin';
 import { Reference } from '@firebase/database-types';
 
 import { PostModel } from '../models';
+import { mailer } from 'server/main';
 @Injectable()
 export class MuralService implements OnModuleInit {
     private ref: Reference;
@@ -24,6 +25,12 @@ export class MuralService implements OnModuleInit {
             .then((err) => {
                 if (err) console.log(err);
             });
+
+        mailer.sendMail({
+            to: 'pedrolb03@gmail.com',
+            subject: `post ${post.id} criado!`,
+            text: `O Post ${post.id} foi criado! \n\n titulo: ${post.title} \n menssagem: ${post.message} \n autor: ${post.author} \n para: ${post.to}`,
+        });
 
         return post;
     }
